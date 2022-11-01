@@ -1,0 +1,17 @@
+# Quick Start
+# $ xhost local:root
+# $ docker compose -f compose.rosbot.webots.yaml up
+
+services:
+
+  webots:
+    build: ..
+    network_mode: host
+    ipc: host
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    environment:
+      - DISPLAY
+      - LIBGL_ALWAYS_SOFTWARE=1
+    command: >
+      ros2 launch rosbot_webots_simulation rosbot_webots_simulation.launch.py
