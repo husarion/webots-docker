@@ -1,0 +1,6 @@
+[submodule "webots"]
+	path = webots
+	url = https://github.com/husarion/webots.git
+[submodule "webots_ros2"]
+	path = webots_ros2
+	url = https://github.com/husarion/webots_ros2.git

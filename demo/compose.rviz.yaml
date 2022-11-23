@@ -8,13 +8,12 @@ services:
   rviz:
     image: husarion/rviz2:galactic
     container_name: rviz
-    network_mode: host
-    ipc: host
     restart: on-failure
+    runtime: nvidia
     volumes:
-      # - ./robot_model:/robot_model
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      # - ./config/rosbot.rviz:/root/.rviz2/default.rviz
+      - ./config/rosbot.rviz:/root/.rviz2/default.rviz
     environment:
       - DISPLAY=${DISPLAY:?err}
       - LIBGL_ALWAYS_SOFTWARE=1
+    command: rviz2 --ros-args -p use_sim_time:=True
