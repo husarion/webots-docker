@@ -1,5 +1,5 @@
 # Quick Start (at fist stop ROS Master if working on host)
-# $ docker compose -f compose.rosbot.webots.yaml -f compose.rosbot.mapping.yaml up
+# $ docker compose -f compose.rosbot.mapping.yaml up
 
 services:
 

@@ -57,12 +57,19 @@ COPY ros_entrypoint.sh /
 ENTRYPOINT ["/ros_entrypoint.sh"]
 RUN chmod +x /ros_entrypoint.sh
 
-COPY ./webots_ros2/webots_ros2_husarion /ros2_ws/src/webots_ros2_husarion
-COPY ./webots_ros2/webots_ros2_husarion/webots_ros2_husarion/resource/Rosbot.proto /tmp/protos/Rosbot.proto
-COPY ./webots_ros2/webots_ros2_husarion/webots_ros2_husarion/resource/meshes /tmp/protos/meshes
-
-COPY ./webots/projects/appearances /usr/local/webots/projects/appearances
-COPY ./webots/projects/devices /usr/local/webots/projects/devices
-
 WORKDIR /ros2_ws
+RUN apt-get update -y && apt-get install -y git curl
+RUN git clone https://github.com/husarion/webots.git src/webots -b husarion
+
+RUN cp -r src/webots/projects/appearances/* /usr/local/webots/projects/appearances/ && \
+    cp -r src/webots/projects/devices/* /usr/local/webots/projects/devices/
+
+
+RUN git clone https://github.com/husarion/webots_ros2.git src/webots_ros2 -b husarion && \
+    cd src/webots_ros2 && git submodule update --init webots_ros2_husarion/rosbot_ros && cd /ros2_ws && \
+    mkdir -p /tmp/protos && \
+    cp src/webots_ros2/webots_ros2_husarion/webots_ros2_husarion/resource/Rosbot.proto /tmp/protos/Rosbot.proto && \
+    cp src/webots_ros2/webots_ros2_husarion/webots_ros2_husarion/resource/RpLidarA2.proto /tmp/protos/RpLidarA2.proto && \
+    cp -r src/webots_ros2/webots_ros2_husarion/webots_ros2_husarion/resource/meshes /tmp/protos/meshes
+
 RUN source /opt/ros/${ROS_DISTRO}/setup.bash && colcon build --packages-select webots_ros2_husarion rosbot_description rosbot_bringup
