@@ -66,7 +66,9 @@ RUN cp -r src/webots/projects/appearances/* /usr/local/webots/projects/appearanc
 
 
 RUN git clone https://github.com/husarion/webots_ros2.git src/webots_ros2 -b husarion && \
-    cd src/webots_ros2 && git submodule update --init webots_ros2_husarion/rosbot_ros && cd /ros2_ws && \
+    cd src/webots_ros2 && git submodule update --init webots_ros2_husarion/rosbot_ros && cd /ros2_ws
+# COPY webots_ros2/ src/webots_ros2
+RUN \
     mkdir -p /tmp/protos && \
     cp src/webots_ros2/webots_ros2_husarion/webots_ros2_husarion/resource/Rosbot.proto /tmp/protos/Rosbot.proto && \
     cp src/webots_ros2/webots_ros2_husarion/webots_ros2_husarion/resource/RpLidarA2.proto /tmp/protos/RpLidarA2.proto && \
