@@ -1,0 +1,29 @@
+# $ docker compose -f compose.rosbot.navigation.yaml up
+services:
+  navigation:
+    image: husarion/navigation2:humble-22-11-25
+    network_mode: host
+    ipc: host
+    volumes:
+      - ./config/nav2_params.yaml:/nav2_params.yaml
+    environment:
+      - RMW_IMPLEMENTATION
+    command: >
+      ros2 launch nav2_bringup navigation_launch.py
+        params_file:=/nav2_params.yaml
+        use_sim_time:=true
+
+  localization:
+    image: husarion/navigation2:humble-22-11-25
+    network_mode: host
+    ipc: host
+    volumes:
+      - ./config/amcl_params.yaml:/amcl_params.yaml
+      - ./maps:/maps
+    environment:
+      - RMW_IMPLEMENTATION
+    command: >
+      ros2 launch nav2_bringup localization_launch.py
+        params_file:=/amcl_params.yaml
+        map:=/maps/map.yaml
+        use_sim_time:=true

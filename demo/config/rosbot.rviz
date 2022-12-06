@@ -46,86 +46,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        body_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        cover_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        fl_range:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        fl_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        fr_range:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        fr_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        imu_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        laser:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        orbbec_astra_depth_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        orbbec_astra_depth_reference_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        orbbec_astra_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rl_range:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        rl_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rplidar_a2_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rr_range:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        rr_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Name: RobotModel
       TF Prefix: ""
       Update Interval: 0
@@ -273,34 +193,6 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        base_link:
-          Value: true
-        body_link:
-          Value: false
-        camera_link:
-          Value: false
-        cover_link:
-          Value: false
-        fl_range:
-          Value: false
-        fr_range:
-          Value: false
-        imu_link:
-          Value: false
-        laser:
-          Value: false
-        orbbec_astra_depth_link:
-          Value: false
-        orbbec_astra_depth_reference_link:
-          Value: false
-        orbbec_astra_link:
-          Value: false
-        rl_range:
-          Value: false
-        rplidar_a2_link:
-          Value: false
-        rr_range:
-          Value: false
       Marker Scale: 0.699999988079071
       Name: TF
       Show Arrows: true
@@ -494,7 +386,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: false
-      Enabled: true
+      Enabled: false
       Keep: 1
       Name: Odometry
       Position Tolerance: 0.10000000149011612
@@ -515,7 +407,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /rosbot_base_controller/odom
-      Value: true
+      Value: false
     - Angle Tolerance: 0.10000000149011612
       Class: rviz_default_plugins/Odometry
       Covariance:
@@ -533,7 +425,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: false
-      Enabled: true
+      Enabled: false
       Keep: 1
       Name: Odometry
       Position Tolerance: 0.10000000149011612
@@ -554,11 +446,11 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /odometry/filtered
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: odom
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
