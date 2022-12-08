@@ -6,7 +6,8 @@ ROSbot autonomous navigation demo in webots simulation
 Before running pull all required submodules.
 ```bash
 git submodule update --init webots_ros2
-git submodule update --init webots_ros2/webots_ros2_husarion/rosbot_ros
+cd webots_ros2
+git submodule update --init webots_ros2_husarion/rosbot_ros
 ```
 
 
