@@ -3,6 +3,13 @@ ROSbot autonomous navigation demo in webots simulation
 ![ROSbot in webots simulator](.docs/rosbot.png)
 
 ## Run with `docker compose`
+Before running pull all required submodules.
+```bash
+git submodule update --init webots_ros2
+git submodule update --init webots_ros2/webots_ros2_husarion/rosbot_ros
+```
+
+
 To start simulation build and run webots simulator container. It will take a while because the container has to download required assets:
 ```bash
 cd demo
