@@ -6,7 +6,7 @@ services:
 
   # ROS Galactic
   rviz:
-    image: husarion/rviz2:galactic
+    image: husarion/rviz2:humble-22-11-25
     container_name: rviz
     restart: on-failure
     runtime: nvidia
@@ -16,4 +16,6 @@ services:
     environment:
       - DISPLAY=${DISPLAY:?err}
       - LIBGL_ALWAYS_SOFTWARE=1
+      - DDS_CONFIG
+      - RMW_IMPLEMENTATION
     command: rviz2 --ros-args -p use_sim_time:=True

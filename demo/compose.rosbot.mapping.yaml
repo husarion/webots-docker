@@ -18,6 +18,9 @@ services:
     restart: unless-stopped
     volumes:
       - ./config/nav2_params.yaml:/nav2_params.yaml
+    environment:
+      - DDS_CONFIG
+      - RMW_IMPLEMENTATION
     command: >
       ros2 launch nav2_bringup navigation_launch.py
         params_file:=/nav2_params.yaml
@@ -30,6 +33,9 @@ services:
     volumes:
       - ./config/slam_params.yaml:/slam_params.yaml
       - ./maps:/maps
+    environment:
+      - DDS_CONFIG
+      - RMW_IMPLEMENTATION
     command: >
       ros2 launch slam_toolbox online_sync_launch.py
         slam_params_file:=/slam_params.yaml

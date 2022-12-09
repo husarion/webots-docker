@@ -7,6 +7,7 @@ services:
     volumes:
       - ./config/nav2_params.yaml:/nav2_params.yaml
     environment:
+      - DDS_CONFIG
       - RMW_IMPLEMENTATION
     command: >
       ros2 launch nav2_bringup navigation_launch.py
@@ -21,6 +22,7 @@ services:
       - ./config/amcl_params.yaml:/amcl_params.yaml
       - ./maps:/maps
     environment:
+      - DDS_CONFIG
       - RMW_IMPLEMENTATION
     command: >
       ros2 launch nav2_bringup localization_launch.py

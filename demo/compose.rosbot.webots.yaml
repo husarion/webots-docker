@@ -8,9 +8,12 @@ services:
     build: ..
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ../webots/projects:/usr/local/webots/projects
     runtime: nvidia
     environment:
       - DISPLAY
       - LIBGL_ALWAYS_SOFTWARE=1
+      - DDS_CONFIG
+      - RMW_IMPLEMENTATION
     command: >
       ros2 launch webots_ros2_husarion robot_launch.py
