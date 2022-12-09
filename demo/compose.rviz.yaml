@@ -1,0 +1,21 @@
+# Quick Start
+# $ xhost local:root
+# $ docker compose -f compose.rviz.yaml up
+
+services:
+
+  # ROS Galactic
+  rviz:
+    image: husarion/rviz2:humble-22-11-25
+    container_name: rviz
+    restart: on-failure
+    runtime: nvidia
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./config/rosbot.rviz:/root/.rviz2/default.rviz
+    environment:
+      - DISPLAY=${DISPLAY:?err}
+      - LIBGL_ALWAYS_SOFTWARE=1
+      - DDS_CONFIG
+      - RMW_IMPLEMENTATION
+    command: rviz2 --ros-args -p use_sim_time:=True
