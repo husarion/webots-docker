@@ -1,52 +1,21 @@
 # webots-docker
-ROSbot in webots simulation
+[![Build/Publish Docker Image](https://github.com/husarion/webots-docker/actions/workflows/build-docker-image.yaml/badge.svg)](https://github.com/husarion/webots-docker/actions/workflows/build-docker-image.yaml)
+
+Dockerized ROSbot simulation in webots built for ROS2 Galactic distro.
 ![ROSbot in webots simulator](.docs/rosbot.png)
 
-## Run with `docker compose`
-To start simulation build and run webots simulator container. It will take a while because the container has to download required assets:
+# Docker image usage
+Available tags: `galactic`.
+## Pulling docker image
 ```bash
-cd demo
-docker compose -f compose.rosbot.webots.yaml up --build
+docker pull husarion/webots
 ```
-
-Wait until this messages show up in the Webots console.
-> INFO: 'rosbot' extern controller: connected.
->
-> INFO: 'Ros2Supervisor' extern controller: connected.
-
-Then run rviz2 to navigate the ROSBot:
+## Running docker image
 ```bash
-cd demo
-docker compose -f compose.rviz.yaml up
+docker run --rm -it \
+-v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+-e DISPLAY -e LIBGL_ALWAYS_SOFTWARE=1 \
+-e DDS_CONFIG=DEFAULT -e RMW_IMPLEMENTATION=rmw_fastrtps_cpp \
+husarion/webots:galactic \
+ros2 launch webots_ros2_husarion robot_launch.py
 ```
-
-# Mapping case
-> **Warning**
-> The [use_scan_matching](https://github.com/husarion/rosbot-webots-navigation/blob/dev/demo/config/slam_params.yaml#L31) parameter is not used due to bugged map building.
-
-Open new terminal and run navigation2 with slam-toolbox and map-saver:
-```bash
-cd demo
-docker compose -f compose.rosbot.mapping.yaml up
-```
-
-Demo is launched. Now go to rviz2 choose option `Nav2 Goal` and select a goal position for ROSbot.
-![ROSbot in rviz2 is going to pose](.docs/go_to_pose.png)
-
-# Navigation case
-If you don't want to map on your own copy files from `built_map` to `maps` folder:
-```bash
-cd demo
-cp built_map/map.yaml maps/
-cp built_map/map.png maps/
-
-```
-
-Open new terminal and run navigation2 with amcl:
-```bash
-cd demo
-docker compose -f compose.rosbot.navigation.yaml up
-```
-
-Demo is launched. Go to rviz2 choose option `2D Pose Estimate` and select initial position of ROSbot.
-Now you can click on the `Nav2 Goal` button and select a goal position for ROSbot.
