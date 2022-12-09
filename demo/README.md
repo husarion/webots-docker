@@ -24,15 +24,14 @@ docker compose -f compose.rosbot.mapping.yaml up
 ```
 
 Demo is launched. Now go to rviz2 choose option `Nav2 Goal` and select a goal position for ROSbot.
-![ROSbot in rviz2 is going to pose](../.docs/go_to_pose.png)
 
 # Navigation case
 If you don't want to map on your own copy files from `built_map` to `maps` folder:
 ```bash
 cp built_map/map.yaml maps/
 cp built_map/map.png maps/
-
 ```
+![Built map](built_map/map.png)
 
 Open new terminal and run navigation2 with amcl:
 ```bash
