@@ -19,3 +19,8 @@ docker run --rm -it \
 husarion/webots:galactic \
 ros2 launch webots_ros2_husarion robot_launch.py
 ```
+
+# ROSbot webots mapping and navigation demo
+Check it out in [demo/](demo/]) folder.
+
+![ROSbot in rviz2 is going to pose](.docs/go_to_pose.png)
