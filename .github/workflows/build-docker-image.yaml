@@ -82,4 +82,4 @@ jobs:
         push: true
         build-args: |
           ROS_DISTRO=${{ matrix.ros-distro }}
-        tags: husarion/main:${{ matrix.ros-distro }}-${{ github.head_ref || github.ref_name }}
+        tags: husarion/webots:${{ matrix.ros-distro }}-${{ github.head_ref || github.ref_name }}
