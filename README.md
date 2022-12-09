@@ -1,5 +1,5 @@
-# rosbot-webots-navigation
-ROSbot autonomous navigation demo in webots simulation
+# webots-docker
+ROSbot in webots simulation
 ![ROSbot in webots simulator](.docs/rosbot.png)
 
 ## Run with `docker compose`
