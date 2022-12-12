@@ -48,6 +48,7 @@ COPY --from=package-builder /webots/projects/objects/floors/ /usr/local/webots/p
 COPY --from=package-builder /webots/projects/default/worlds/textures/cubic/ /usr/local/webots/projects/default/worlds/textures/cubic/
 COPY --from=package-builder /webots/projects/devices/tdk/ /usr/local/webots/projects/devices/tdk/
 COPY --from=package-builder /webots/projects/robots/husarion/ /usr/local/webots/projects/robots/husarion/
+COPY --from=package-builder /webots/projects/devices/slamtec/ /usr/local/webots/projects/devices/slamtec/
 
 WORKDIR /ros2_ws
 RUN apt-get update -y && apt-get install -y git wget ros-$ROS_DISTRO-ros-base ros-$ROS_DISTRO-webots-ros2 \
