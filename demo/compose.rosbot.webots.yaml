@@ -5,10 +5,9 @@
 services:
 
   webots:
-    build: ..
+    image: husarion/webots:galactic
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      # - ../webots/projects:/usr/local/webots/projects
     runtime: nvidia
     environment:
       - DISPLAY

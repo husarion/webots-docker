@@ -16,10 +16,6 @@ RUN apt-get update -y && apt-get install -y git ros-$ROS_DISTRO-webots-ros2 pyth
 RUN cd / && git clone https://github.com/husarion/webots.git webots -b husarion
 WORKDIR /ros2_ws
 
-# TODO: Develop
-# COPY webots_ros2/ src/webots_ros2
-
-# TODO: Deploy
 RUN cd  /ros2_ws && \
     git clone https://github.com/husarion/webots_ros2.git src/webots_ros2 -b husarion && \
     cd src/webots_ros2 && git submodule update --init webots_ros2_husarion/rosbot_ros && cd /ros2_ws
@@ -51,6 +47,7 @@ COPY --from=package-builder /webots/projects/objects/backgrounds/ /usr/local/web
 COPY --from=package-builder /webots/projects/objects/floors/ /usr/local/webots/projects/objects/floors/
 COPY --from=package-builder /webots/projects/default/worlds/textures/cubic/ /usr/local/webots/projects/default/worlds/textures/cubic/
 COPY --from=package-builder /webots/projects/devices/tdk/ /usr/local/webots/projects/devices/tdk/
+COPY --from=package-builder /webots/projects/robots/husarion/ /usr/local/webots/projects/robots/husarion/
 
 WORKDIR /ros2_ws
 RUN apt-get update -y && apt-get install -y git wget ros-$ROS_DISTRO-ros-base ros-$ROS_DISTRO-webots-ros2 \
