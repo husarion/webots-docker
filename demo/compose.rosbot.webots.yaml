@@ -15,4 +15,4 @@ services:
       - DDS_CONFIG
       - RMW_IMPLEMENTATION
     command: >
-      ros2 launch webots_ros2_husarion robot_launch.py
+      ros2 launch webots_ros2_husarion robot_launch.py robot_name:=${ROBOT_NAME}

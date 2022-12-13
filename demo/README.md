@@ -1,3 +1,6 @@
+## Environment
+In the [.env](.env) file you can choose a robot and a dds configuration you want to work with.
+
 ## Run with `docker compose`
 To start simulation build and run webots simulator container. It will take a while because the container has to download required assets:
 ```bash

@@ -1,7 +1,7 @@
 # webots-docker
 [![Build/Publish Docker Image](https://github.com/husarion/webots-docker/actions/workflows/build-docker-image.yaml/badge.svg)](https://github.com/husarion/webots-docker/actions/workflows/build-docker-image.yaml)
 
-Dockerized ROSbot simulation in webots built for ROS2 Galactic distro.
+Dockerized ROSbot 2R and ROSbot XL simulation in webots built for ROS2 Galactic distro.
 ![ROSbot in webots simulator](.docs/rosbot.png)
 
 # Docker image usage
@@ -17,7 +17,7 @@ docker run --rm -it \
 -e DISPLAY -e LIBGL_ALWAYS_SOFTWARE=1 \
 -e DDS_CONFIG=DEFAULT -e RMW_IMPLEMENTATION=rmw_fastrtps_cpp \
 husarion/webots:galactic \
-ros2 launch webots_ros2_husarion robot_launch.py
+ros2 launch webots_ros2_husarion robot_launch.py robot_name:=rosbot # robot_name:=rosbot_xl
 ```
 
 # ROSbot webots mapping and navigation demo

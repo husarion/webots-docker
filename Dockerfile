@@ -7,21 +7,34 @@ FROM husarnet/ros:$ROS_DISTRO-ros-core-0.1.0 AS husarnet-ros
 FROM ros:$ROS_DISTRO-ros-base AS package-builder
 
 RUN apt-get update -y && apt-get install -y git ros-$ROS_DISTRO-webots-ros2 python3-colcon-common-extensions \
-        ros-$ROS_DISTRO-robot-localization \
+        ros-$ROS_DISTRO-robot-localization python3-vcstool \
     && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN cd / && git clone https://github.com/husarion/webots.git webots -b husarion
+RUN cd / && git clone https://github.com/husarion/webots.git webots -b husarion-rosbot-xl
 WORKDIR /ros2_ws
 
+# TODO: Develop
+# COPY webots_ros2/ src/webots_ros2
+
+# TODO: Deploy
 RUN cd  /ros2_ws && \
-    git clone https://github.com/husarion/webots_ros2.git src/webots_ros2 -b husarion && \
-    cd src/webots_ros2 && git submodule update --init webots_ros2_husarion/rosbot_ros && cd /ros2_ws
+    git clone https://github.com/husarion/webots_ros2.git src/webots_ros2 -b husarion-rosbot-xl && \
+    cd src/webots_ros2 && \
+    git submodule update --init webots_ros2_husarion/rosbot_ros && \
+    git submodule update --init webots_ros2_husarion/rosbot_xl_ros && \
+    cd /ros2_ws
 
 SHELL ["/bin/bash", "-c"]
-RUN source /opt/ros/$ROS_DISTRO/setup.bash && colcon build --packages-select webots_ros2_husarion rosbot_description rosbot_bringup
+RUN vcs import src < src/webots_ros2/webots_ros2_husarion/rosbot_xl_ros/rosbot_xl/rosbot_xl_hardware.repos && \
+    vcs import src < src/webots_ros2/webots_ros2_husarion/rosbot_xl_ros/rosbot_xl/rosbot_xl_simulation.repos
+
+RUN source /opt/ros/$ROS_DISTRO/setup.bash && \
+    colcon build --packages-select webots_ros2_husarion rosbot_description rosbot_bringup \
+                                   rosbot_xl_bringup rosbot_xl_description \
+                                    ros_components_description
 
 FROM cyberbotics/webots:R2023a-ubuntu20.04
 SHELL ["/bin/bash", "-c"]
@@ -48,6 +61,7 @@ COPY --from=package-builder /webots/projects/objects/floors/ /usr/local/webots/p
 COPY --from=package-builder /webots/projects/default/worlds/textures/cubic/ /usr/local/webots/projects/default/worlds/textures/cubic/
 COPY --from=package-builder /webots/projects/devices/tdk/ /usr/local/webots/projects/devices/tdk/
 COPY --from=package-builder /webots/projects/robots/husarion/ /usr/local/webots/projects/robots/husarion/
+COPY --from=package-builder /webots/projects/devices/slamtec /usr/local/webots/projects/devices/slamtec
 
 WORKDIR /ros2_ws
 RUN apt-get update -y && apt-get install -y git wget ros-$ROS_DISTRO-ros-base ros-$ROS_DISTRO-webots-ros2 \
