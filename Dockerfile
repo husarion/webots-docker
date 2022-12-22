@@ -13,13 +13,9 @@ RUN apt-get update -y && apt-get install -y git ros-$ROS_DISTRO-webots-ros2 pyth
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN cd / && git clone https://github.com/husarion/webots.git webots -b husarion-rosbot-xl
+RUN cd / && git clone https://github.com/husarion/webots.git webots -b husarion
 WORKDIR /ros2_ws
 
-# TODO: Develop
-# COPY webots_ros2/ src/webots_ros2
-
-# TODO: Deploy
 RUN cd  /ros2_ws && \
     git clone https://github.com/husarion/webots_ros2.git src/webots_ros2 -b husarion-rosbot-xl && \
     cd src/webots_ros2 && \
