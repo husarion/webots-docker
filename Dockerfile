@@ -6,8 +6,8 @@ FROM husarnet/ros:$ROS_DISTRO-ros-core-0.1.0 AS husarnet-ros
 
 FROM ros:$ROS_DISTRO-ros-base AS package-builder
 
-RUN apt-get update -y && apt-get install -y git ros-$ROS_DISTRO-webots-ros2 python3-colcon-common-extensions \
-        ros-$ROS_DISTRO-robot-localization python3-vcstool \
+RUN apt-get update -y && apt-get install -y git python3-colcon-common-extensions python3-vcstool \
+                                            ros-$ROS_DISTRO-webots-ros2 ros-$ROS_DISTRO-robot-localization \
     && \
     apt-get autoremove -y && \
     apt-get clean && \
@@ -28,8 +28,10 @@ RUN vcs import src < src/webots_ros2/webots_ros2_husarion/rosbot_xl_ros/rosbot_x
     vcs import src < src/webots_ros2/webots_ros2_husarion/rosbot_xl_ros/rosbot_xl/rosbot_xl_simulation.repos
 
 RUN source /opt/ros/$ROS_DISTRO/setup.bash && \
-    colcon build --packages-select webots_ros2_husarion rosbot_description rosbot_bringup \
-                                   rosbot_xl_bringup rosbot_xl_description \
+    colcon build --packages-select  webots_ros2_husarion \
+                                    rosbot_description \
+                                    rosbot_bringup \
+                                    rosbot_xl_description  \
                                     ros_components_description
 
 FROM cyberbotics/webots:R2023a-ubuntu20.04

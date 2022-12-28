@@ -17,10 +17,19 @@ docker run --rm -it \
 -e DISPLAY -e LIBGL_ALWAYS_SOFTWARE=1 \
 -e DDS_CONFIG=DEFAULT -e RMW_IMPLEMENTATION=rmw_fastrtps_cpp \
 husarion/webots:galactic \
-ros2 launch webots_ros2_husarion robot_launch.py robot_name:=rosbot # robot_name:=rosbot_xl
+ros2 launch webots_ros2_husarion robot_launch.py
 ```
 
-# ROSbot webots mapping and navigation demo
-Check it out in [demo/](demo/) folder.
+If you want to use ROSbot XL add a `robot_name` parameter to the launch command.
+```bash
+docker run --rm -it \
+-v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+-e DISPLAY -e LIBGL_ALWAYS_SOFTWARE=1 \
+-e DDS_CONFIG=DEFAULT -e RMW_IMPLEMENTATION=rmw_fastrtps_cpp \
+husarion/webots:galactic \
+ros2 launch webots_ros2_husarion robot_launch.py robot_name:="rosbot_xl"
+```
+![ROSbot XL in webots simulator](.docs/rosbot_xl.png)
 
-![ROSbot in rviz2 is going to pose](.docs/go_to_pose.png)
+## Running demo with `docker compose`
+Go to [demo/](demo/) folder and read [demo/README.md](demo/README.md).
