@@ -9,6 +9,8 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
     runtime: nvidia
+    network_mode: host
+    ipc: host
     environment:
       - DISPLAY
       - LIBGL_ALWAYS_SOFTWARE=1
