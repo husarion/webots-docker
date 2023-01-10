@@ -18,9 +18,6 @@ jobs:
           - ros-distro: galactic
             platforms: "linux/amd64"
 
-          - ros-distro: humble
-            platforms: "linux/amd64"
-
     steps:
 
     - name: Print event name
