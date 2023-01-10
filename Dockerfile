@@ -21,7 +21,7 @@ RUN cd / && mkdir webots_assets && cd webots_assets && git clone https://github.
 WORKDIR /ros2_ws
 
 RUN cd  /ros2_ws && \
-    git clone https://github.com/husarion/webots_ros2.git src/webots_ros2 -b husarion-rosbot-xl && \
+    git clone https://github.com/husarion/webots_ros2.git src/webots_ros2 -b husarion && \
     cd src/webots_ros2 && \
     git submodule update --init webots_ros2_husarion/rosbot_ros && \
     git submodule update --init webots_ros2_husarion/rosbot_xl_ros && \
@@ -37,7 +37,6 @@ RUN source /opt/ros/$ROS_DISTRO/setup.bash && \
                                     rosbot_bringup \
                                     rosbot_xl_description  \
                                     ros_components_description
-
 FROM husarnet/ros:$ROS_DISTRO-ros-base
 
 SHELL ["/bin/bash", "-c"]
@@ -70,7 +69,7 @@ RUN apt-get update && apt-get install --yes wget && rm -rf /var/lib/apt/lists/ &
 
 WORKDIR /ros2_ws
 RUN apt-get update -y && apt-get install -y git wget ros-$ROS_DISTRO-ros-base ros-$ROS_DISTRO-webots-ros2 \
-        ros-$ROS_DISTRO-xacro ros-$ROS_DISTRO-robot-localization python3-pillow \
+        ros-$ROS_DISTRO-xacro ros-$ROS_DISTRO-robot-localization ros-$ROS_DISTRO-laser-filters python3-pillow \
     && \
     apt-get autoremove -y && \
     apt-get clean && \
