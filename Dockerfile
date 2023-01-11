@@ -1,4 +1,4 @@
-ARG ROS_DISTRO=galactic
+ARG ROS_DISTRO=humble
 
 FROM husarnet/ros:$ROS_DISTRO-ros-base AS package-builder
 
@@ -21,7 +21,7 @@ RUN cd / && mkdir webots_assets && cd webots_assets && git clone https://github.
 WORKDIR /ros2_ws
 
 RUN cd  /ros2_ws && \
-    git clone https://github.com/husarion/webots_ros2.git src/webots_ros2 -b husarion && \
+    git clone https://github.com/husarion/webots_ros2.git src/webots_ros2 -b $ROS_DISTRO && \
     cd src/webots_ros2 && \
     git submodule update --init webots_ros2_husarion/rosbot_ros && \
     git submodule update --init webots_ros2_husarion/rosbot_xl_ros && \
@@ -33,6 +33,9 @@ RUN vcs import src < src/webots_ros2/webots_ros2_husarion/rosbot_xl_ros/rosbot_x
 
 RUN source /opt/ros/$ROS_DISTRO/setup.bash && \
     colcon build --packages-select  webots_ros2_husarion \
+                                    webots_ros2_driver \
+                                    webots_ros2_msgs \
+                                    webots_ros2_control \
                                     rosbot_description \
                                     rosbot_bringup \
                                     rosbot_xl_description  \
