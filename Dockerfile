@@ -35,7 +35,6 @@ RUN source /opt/ros/$ROS_DISTRO/setup.bash && \
     colcon build --packages-select  webots_ros2_husarion \
                                     webots_ros2_driver \
                                     webots_ros2_msgs \
-                                    webots_ros2_control \
                                     rosbot_description \
                                     rosbot_bringup \
                                     rosbot_xl_description  \
